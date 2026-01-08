@@ -1,0 +1,72 @@
+I'll provide the user with a comprehensive guide to verify their system's health. First, I'll confirm their Nginx page is  accessible. Then, I'll detail verification steps for the ALB/ECS public URL, ECS service status (via Console and CLI),   
+  RDS database status (Console and CLI), and ALB target group health (Console and CLI), explaining what a "healthy" status 
+  means for each. I'll also briefly cover security group inspection. The guide will be well-structured with clear headings,  bullet points, and the necessary AWS CLI commands.Of course. Here is a guide to check if your infrastructure is working  
+  correctly.
+
+  1. Check the Web Page
+
+  The first and most important check is to see if the Nginx web server is accessible from the internet. I have already     
+  verified this for you. The URL http://my-alb-1449574490.ap-south-1.elb.amazonaws.com is serving the default Nginx welcome  page. This indicates that your ALB, ECS service, and the networking are correctly configured to serve web traffic.       
+
+  2. Check the ECS Service Status
+
+  You can check the status of your ECS service to ensure it's running as expected.
+
+  Using the AWS Management Console:
+
+   1. Go to the Amazon ECS service in the AWS Console.
+   2. In the left navigation pane, click on Clusters and select the my-ecs cluster.
+   3. Under the Services tab, you should see the my-ecs service.
+   4. Check the following:
+       * Status: Should be ACTIVE.
+       * Tasks: You should see 1 running task. The "Running tasks" count should be equal to the "Desired tasks" count.     
+
+  Using the AWS CLI:
+
+  You can also use the following command to check the service status. Replace your-aws-region with the region you are using  (e.g., ap-south-1).
+
+   1 aws ecs describe-services --cluster my-ecs --services my-ecs --region your-aws-region
+
+  Look for "status": "ACTIVE", "runningCount": 1, and "pendingCount": 0.
+
+  3. Check the RDS Database Status
+
+  You can check the status of your RDS database instance to ensure it's ready to accept connections.
+
+  Using the AWS Management Console:
+
+   1. Go to the Amazon RDS service in the AWS Console.
+   2. In the left navigation pane, click on Databases.
+   3. You should see your myrds database instance.
+   4. Check the Status column. It should be Available.
+
+  Using the AWS CLI:
+
+  You can also use the following command to check the instance status. Replace your-aws-region with your AWS region.
+
+   1 aws rds describe-db-instances --db-instance-identifier myrds --region your-aws-region
+
+  Look for "DBInstanceStatus": "available".
+
+  4. Check the Load Balancer Health Checks
+
+  The Application Load Balancer (ALB) continuously checks the health of the ECS tasks.
+
+  Using the AWS Management Console:
+
+   1. Go to the EC2 service in the AWS Console.
+   2. In the left navigation pane, under Load Balancing, click on Target Groups.
+   3. Select the my-alb-tg target group.
+   4. Click on the Targets tab.
+   5. You should see one registered target with a Status of healthy.
+
+  5. Inspect the Security Groups
+
+  The security groups act as firewalls for your resources. You can inspect the rules to understand how traffic is allowed
+  between the different components.
+
+   * ALB Security Group: Allows HTTP traffic from anywhere (0.0.0.0/0).
+   * ECS Security Group: Allows incoming traffic from the ALB's security group on port 80.
+   * RDS Security Group: Allows incoming traffic from the ECS security group on port 5432.
+
+  These checks will give you a comprehensive overview of the health and status of your infrastructure.
