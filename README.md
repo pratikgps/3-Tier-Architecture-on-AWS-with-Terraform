@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 # 3-Tier-Architecture-on-AWS-with-Terraform
 This project deploys a 3-tier web application architecture on Amazon Web Services (AWS) using Terraform. It includes a VPC with public and private subnets, an Application Load Balancer, an ECS cluster running an Nginx container, and an RDS PostgreSQL database.  
 
@@ -16,7 +16,7 @@ The following AWS resources are created:
  *   **Security Groups**: To control traffic between the different components.
 
 ### The Problem: `terraform apply` Failure
-=======
+
 # Deploying a 3-Tier Architecture on AWS with Terraform
 
 This project deploys a 3-tier web application architecture on Amazon Web Services (AWS) using Terraform. It includes a VPC with public and private subnets, an Application Load Balancer, an ECS cluster running an Nginx container, and an RDS PostgreSQL database.
@@ -35,14 +35,13 @@ The following AWS resources are created:
 *   **Security Groups**: To control traffic between the different components.
 
 ## The Problem: `terraform apply` Failure
->>>>>>> 2ff52f5 (Initial commit: 3-tier architecture on AWS using Terraform)
 
 When initially running `terraform apply`, the deployment failed with two main errors:
 
 1.  **Unsupported Attribute**: The `main.tf` file tried to access an output variable `ecs_security_group_id` from the `ecs` module, but this output was not defined in the module.
 2.  **Reference to Undeclared Resource**: The `rds` module's `outputs.tf` file was trying to reference a security group that was not defined within that module.
 
-<<<<<<< HEAD
+
 ## 🔍 Troubleshooting and Resolution
 
 ### 1️⃣ Validation
@@ -85,7 +84,7 @@ When initially running `terraform apply`, the deployment failed with two main er
      ```bash
      terraform plan
      ```
-=======
+
 ## Troubleshooting and Resolution
 
 The following steps were taken to diagnose and resolve the errors:
@@ -125,23 +124,21 @@ The following steps were taken to diagnose and resolve the errors:
     terraform apply
     ```
 
-<<<<<<< HEAD
+
 ## ✅ How to Verify the Deployment
 
 1.  **Access the Web Server**:
     *   Open a web browser and navigate to the `alb_dns_name` provided in the `terraform apply` output. You should see the "Welcome to nginx!" page.
-=======
+
 ## How to Verify the Deployment
 
 1.  **Access the Web Server**: Open a web browser and navigate to the `alb_dns_name` provided in the `terraform apply` output. You should see the "Welcome to nginx!" page.
 
->>>>>>> 2ff52f5 (Initial commit: 3-tier architecture on AWS using Terraform)
 2.  **Check the AWS Console**:
     *   **ECS Cluster**: Navigate to the ECS console and check that the `my-ecs` cluster has a service with one running task.
     *   **RDS Database**: Navigate to the RDS console and check that the `myrds` database instance has a status of `Available`.
     *   **ALB Target Group**: Navigate to the EC2 console, go to "Target Groups," and check that the `my-alb-tg` target group has one `healthy` target.
 
-<<<<<<< HEAD
 ### 📚 Topics Covered
 
  * Terraform Modules and Reusability.
@@ -187,13 +184,7 @@ The following steps were taken to diagnose and resolve the errors:
                  └─────────────────────────────┘
 ```
 
-## 🧑‍💻 Author
 
-### Pratik Gupta
- ***DevOps Engineer | AWS | Terraform***
-      
-
-=======
 ## Topics Covered
 
 *   **Terraform Modules**: Structuring infrastructure code into reusable modules.
@@ -204,4 +195,8 @@ The following steps were taken to diagnose and resolve the errors:
 *   **Terraform Variables**: Using input and output variables to pass data between modules.
 *   **AWS Security Groups**: Defining firewall rules to control network traffic.
 *   **Terraform Troubleshooting**: Using `validate` and `plan` to diagnose and fix configuration errors.
->>>>>>> 2ff52f5 (Initial commit: 3-tier architecture on AWS using Terraform)
+
+## 🧑‍💻 Author
+
+### Pratik Gupta
+ ***DevOps Engineer | AWS | Terraform***
