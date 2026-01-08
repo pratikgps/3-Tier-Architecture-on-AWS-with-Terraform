@@ -1,21 +1,5 @@
 
-# 3-Tier-Architecture-on-AWS-with-Terraform
-This project deploys a 3-tier web application architecture on Amazon Web Services (AWS) using Terraform. It includes a VPC with public and private subnets, an Application Load Balancer, an ECS cluster running an Nginx container, and an RDS PostgreSQL database.  
 
-## Infrastructure Components 
- 
-The following AWS resources are created:  
-
- *   **VPC**: A Virtual Private Cloud to provide an isolated network environment.
- *   **Subnets**: Public and private subnets across two availability zones.
- *   **Internet Gateway**: To provide internet access to the public subnets.
- *   **NAT Gateway**: To allow resources in the private subnets to access the internet.
- *   **Application Load Balancer (ALB)**: To distribute incoming web traffic to the ECS service.
- *   **ECS (Elastic Container Service)**: To run the Nginx web server as a Fargate task.
- *   **RDS (Relational Database Service)**: A PostgreSQL database instance in the private subnets.
- *   **Security Groups**: To control traffic between the different components.
-
-### The Problem: `terraform apply` Failure
 
 # Deploying a 3-Tier Architecture on AWS with Terraform
 
@@ -23,7 +7,7 @@ This project deploys a 3-tier web application architecture on Amazon Web Service
 
 ## Infrastructure Components
 
-The following AWS resources are created:
+### The following AWS resources are created:
 
 *   **VPC**: A Virtual Private Cloud to provide an isolated network environment.
 *   **Subnets**: Public and private subnets across two availability zones.
@@ -95,6 +79,7 @@ The following steps were taken to diagnose and resolve the errors:
     *   Inspected `modules/ecs/main.tf` and found that the security group for the ECS tasks was being created with the name `aws_security_group.ecs_tasks`.
     *   Inspected `modules/ecs/outputs.tf` and confirmed that there was no output for the security group ID.
     *   Added the following output to `modules/ecs/outputs.tf` to expose the security group ID:
+      
         ```terraform
         output "ecs_security_group_id" {
           description = "The ID of the security group for the ECS tasks"
@@ -118,7 +103,7 @@ The following steps were taken to diagnose and resolve the errors:
     ```bash
     terraform plan
     ```
->>>>>>> 2ff52f5 (Initial commit: 3-tier architecture on AWS using Terraform)
+
 3.  **Apply the Configuration**:
     ```bash
     terraform apply
@@ -200,3 +185,4 @@ The following steps were taken to diagnose and resolve the errors:
 
 ### Pratik Gupta
  ***DevOps Engineer | AWS | Terraform***
+
